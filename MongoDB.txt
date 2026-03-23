@@ -1,0 +1,130 @@
+
+C:\Users\Ria>mongosh
+Current Mongosh Log ID: 69c09df5214beded53114029
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.1
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+
+C:\Users\Ria>mongosh "mongodb+srv://cluster0.5l97iur.mongodb.net/" --apiVersion 1 --username riashakya_db_user --password Shakyaariaa@456
+Current Mongosh Log ID: 69c0a0ae1855f98237114029
+Connecting to:          mongodb+srv://<credentials>@cluster0.5l97iur.mongodb.net/?appName=mongosh+2.8.1
+Using MongoDB:          8.0.20 (API Version 1)
+Using Mongosh:          2.8.1
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+Atlas atlas-k2oqaa-shard-0 [primary] test> show db
+MongoshInvalidInputError: [COMMON-10001] 'db' is not a valid argument for "show".
+Atlas atlas-k2oqaa-shard-0 [primary] test> show dbs
+College         8.00 KiB
+sample_mflix  110.40 MiB
+admin         348.00 KiB
+local          17.72 GiB
+Atlas atlas-k2oqaa-shard-0 [primary] test> use test
+already on db test
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.insertMany([{ name : "Ria", age : 18, grade : "A")]}
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:61)
+
+> 1 | db.students.insertMany([{ name : "Ria", age : 18, grade : "A")]}
+    |                                                              ^
+  2 |
+
+Atlas atlas-k2oqaa-shard-0 [primary] test>  db.students.insertMany([{ name : "Ria", age : 18, grade : "A"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('69c0a5841855f9823711402a') }
+}
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.find().pretty
+[Function: pretty] {
+  returnType: 'this',
+  serverVersions: [ '0.0.0', '999.999.999' ],
+  apiVersions: [ 0, Infinity ],
+  topologies: [ 'ReplSet', 'Standalone', 'Sharded', 'LoadBalanced' ],
+  returnsPromise: false,
+  deprecated: false,
+  platforms: [ 'Compass', 'Browser', 'CLI' ],
+  isDirectShellCommand: false,
+  acceptsRawInput: false,
+  shellCommandCompleter: undefined,
+  newShellCommandCompleter: undefined,
+  help: [Function (anonymous)] Help
+}
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.find().pretty()
+[
+  {
+    _id: ObjectId('69c0a5841855f9823711402a'),
+    name: 'Ria',
+    age: 18,
+    grade: 'A'
+  }
+]
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.find({age: {$gt:20}}).pretty()
+
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.find({grade: "A" }).pretty()
+[
+  {
+    _id: ObjectId('69c0a5841855f9823711402a'),
+    name: 'Ria',
+    age: 18,
+    grade: 'A'
+  }
+]
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.find({name:"Ria"}).pretty()
+[
+  {
+    _id: ObjectId('69c0a5841855f9823711402a'),
+    name: 'Ria',
+    age: 18,
+    grade: 'A'
+  }
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.updateOne({name:"Ria"}, {$set : {grade: "B"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.deleteOne({name: "Ria"})
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.find().pretty()
+
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.insertMany([{ name : "Ram", age : 18, grade : "A")]}
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:61)
+
+> 1 | db.students.insertMany([{ name : "Ram", age : 18, grade : "A")]}
+    |                                                              ^
+  2 |
+
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.insertMany([{ name : "Ram", age : 18, grade : "A"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('69c0a9511855f9823711402b') }
+}
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.insertMany([{ name : "Hari", age : 20, grade : "B"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('69c0a9681855f9823711402c') }
+}
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.find().pretty()
+[
+  {
+    _id: ObjectId('69c0a9511855f9823711402b'),
+    name: 'Ram',
+    age: 18,
+    grade: 'A'
+  },
+  {
+    _id: ObjectId('69c0a9681855f9823711402c'),
+    name: 'Hari',
+    age: 20,
+    grade: 'B'
+  }
+]
+Atlas atlas-k2oqaa-shard-0 [primary] test> db.students.countDocuments()
+2
